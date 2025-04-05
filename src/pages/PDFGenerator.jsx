@@ -62,7 +62,16 @@ export default function PDFGenerator({ builds, loading }) {
     pdf.text(`Failed Builds: ${failedBuilds}`, 14, 50);
 
     // Save
-    pdf.save(`ADO_Builds_Report_${new Date().toISOString().slice(0, 10)}.pdf`);
+    const today = new Date();
+    const formattedDate = today
+      .toLocaleDateString("en-GB", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+      })
+      .replace(/ /g, "-");
+
+    pdf.save(`ADO_Builds_Report_${formattedDate}.pdf`);
   };
 
   const formatDuration = (milliseconds) => {
